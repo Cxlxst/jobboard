@@ -19,5 +19,6 @@ Création d’API (ajout, modification, suppression d’une offre) :
 Malheureusement je n’ai pu avoir de formation concernant la création d’API et par manque de temps je n’ai pas pu la réaliser.
 
 Pagination :
+(Précision: j'ai fais les tests avec seulement 2 éléments affichés au début mais j'ai bien noté que le résultat final devait être de 10 annonces par page)
 Les calculs que j’ai pu faire et les références que j’ai trouvées ne m’ont pas suffi pour réaliser cette étape. J’ai essayé avec le LIMIT et le OFFSET.
 J’avais une autre solution mais qui utilisait un GET pour l’obtention de la page, GET que je n’ai pas pu utiliser.
