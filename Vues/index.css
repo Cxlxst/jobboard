@@ -1,0 +1,138 @@
+/* Font face */
+@font-face {
+    font-family: Inter_Light;
+    src: url(../Fonts/Inter-Light.ttf);
+}
+
+@font-face {
+    font-family: Inter_Regular;
+    src: url(../Fonts/Inter-Regular.ttf);
+}
+
+@font-face {
+    font-family: Inter_Medium;
+    src: url(../Fonts/Inter-Medium.ttf);
+}
+
+@font-face {
+    font-family: Inter_SemiBold;
+    src: url(../Fonts/Inter-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: Inter_Black;
+    src: url(../Fonts/Inter-Black.ttf);
+}
+
+body{
+    margin: 0%;
+
+    font-family: Inter_Regular;
+    font-size: 14px;
+}
+
+.buttonNav{
+    font-family: Inter_Medium;
+    background-color: #FFFFFF;
+    border: none;
+
+    cursor: pointer;
+}
+
+.buttonReset{
+    font-family: Inter_Medium;
+    background-color: #E9E0D4;
+    border: none;
+
+    cursor: pointer;
+}
+
+.buttonSearch{
+    background:#388FA3;
+    height: 40px;
+    width: 40px;
+
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttonSearch > img{
+    height: 20px;
+    width: 20px;
+}
+
+.containerInput{
+    display: flex;
+    flex-direction: column;
+}
+
+.flexContainer{
+    display: flex;
+    justify-content: center;
+    padding: 0px 0px 50px 0px;
+}
+
+.flexNav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0px 0px 250px 0px;
+    
+}
+
+h1{
+    text-align: left;
+    padding: 20px 0px 0px 20px;
+    font-family: Inter_Black;
+    color: #388FA3;
+}
+
+.headBar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #E9E0D4;
+    height: 250px;
+}
+
+input{
+    margin: 0px 30px 0px 0px;
+    padding: 0px 0px 0px 25px;
+    height: 40px;
+
+    border: none;
+    border-radius: 5px;
+}
+
+.inputRecherche{
+    width: 300px;
+}
+
+.jobBox{
+    display: flex;
+    align-items: center;
+
+    margin: 25px 0px 0px 0px;
+    padding: 10px 0px 10px 25px;
+    width: 1200px;
+    height: 120px;
+
+    background-color: rgb(231, 224, 213);
+    border-radius: 5px;
+
+}
+
+.jobImg{
+    margin: 0px 30px 0px 0px;
+    border-radius: 2px;
+}
+
+select{
+    margin: 0px 30px 0px 0px;
+    padding: 0px 15px 0px 25px;
+    height: 40px;
+
+    border: none;
+    border-radius: 5px;
+}
