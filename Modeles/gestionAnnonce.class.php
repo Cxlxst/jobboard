@@ -5,7 +5,7 @@ class gestionAnnonce{
     private $image;
     private $intitule;
     private $nomSociete;
-    private $datePublication;
+    private $dateP;
     private $dateMaj;
     private $libelleVille;
     private $libelleContrat;
@@ -35,7 +35,7 @@ class gestionAnnonce{
     }
 
     public function getDatePublication(){
-        return $this->datePublication;
+        return $this->dateP;
     }
 
     public function getDateMaj(){
@@ -67,13 +67,13 @@ class gestionAnnonce{
 
     //Affiche la liste de toutes les annnonces
     public static function listeAnnonces(){
-        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, datePublication, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
+        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, DATE_FORMAT(datePublication, '%d/%m/%Y') AS dateP, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
                                                 FROM annonces A
                                                 JOIN societes S ON A.societe = S.id
                                                 JOIN contrats C ON A.contrat = C.id
                                                 JOIN metiers M ON A.metier = M.id
                                                 JOIN villes V ON A.lieu = V.id
-                                                -- ORDER BY datePublication DESC
+                                                ORDER BY datePublication DESC
                                                 LIMIT 0,10 ");
         $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'gestionAnnonce');
         $req->execute();
@@ -101,10 +101,10 @@ class gestionAnnonce{
             $libContrat = " AND C.libelle= :libelleContrat ";
         }
 
-        if($filtres == "dateAsc"){
+        if($filtres == "dateDesc"){
             $filtreApplique = " ORDER BY datePublication DESC ";
         }
-        else if($filtres == "dateDesc"){
+        else if($filtres == "dateAsc"){
             $filtreApplique = " ORDER BY datePublication ";
         }
         else if($filtres == "alphAZ"){
@@ -160,7 +160,7 @@ class gestionAnnonce{
     //Affiche la liste de toutes les annnonces en appuyant sur le bouton suivant
     public static function listeAnnoncesSuivante($numPageCalcul){
 
-        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, datePublication, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
+        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, DATE_FORMAT(datePublication, '%d/%m/%Y'), A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
                                                 FROM annonces A
                                                 JOIN societes S ON A.societe = S.id
                                                 JOIN contrats C ON A.contrat = C.id
@@ -177,7 +177,7 @@ class gestionAnnonce{
 
     //Affiche la liste de toutes les annnonces en appuyant sur le bouton précédent
     public static function listeAnnoncesPrecendente($numPageCalcul){
-        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, datePublication, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
+        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, DATE_FORMAT(datePublication, '%d/%m/%Y'), A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
                                                 FROM annonces A
                                                 JOIN societes S ON A.societe = S.id
                                                 JOIN contrats C ON A.contrat = C.id
