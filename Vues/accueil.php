@@ -82,6 +82,10 @@
                     foreach($annonces as $annonce){ ?>
                     <div class="jobBox">
                         <?php
+                        $dateP = $annonce->getDatePublication();
+                        $datePFinal = new DateTimeImmutable($dateP);
+                        $datePFinal = $datePFinal->format('d/m/Y');
+                        
                         $response = file_get_contents('https://random.imagecdn.app/v1/image?width=100&height=100&category=buildings&format=json'); 
                         $decoded_json=json_decode($response); ?>
 
@@ -90,7 +94,7 @@
                         echo $annonce->getSociete() . " · " . $annonce->getIntitule(). "<br/>" ;
                         echo $annonce->getContrat() .", ". $annonce->getMetier(). "<br/>" ;
                         echo $annonce->getLieu(). "<br/>" ?>
-                        Publiée le <?php echo $annonce->getDatePublication(). "<br/>" ?>
+                        Publiée le <?php echo $datePFinal. "<br/>" ?>
                         Référence : <?php echo $annonce->getIdReference(). "<br/> <br/>" ?>
                     </div>
                     <?php }

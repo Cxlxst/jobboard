@@ -5,7 +5,7 @@ class gestionAnnonce{
     private $image;
     private $intitule;
     private $nomSociete;
-    private $dateP;
+    private $datePublication;
     private $dateMaj;
     private $libelleVille;
     private $libelleContrat;
@@ -14,8 +14,6 @@ class gestionAnnonce{
     
     private $codePostal;
     private $nbrAnnonces;
-    private $premiere;
-    private $derniere;
 
 
     public function getIdReference(){
@@ -35,7 +33,7 @@ class gestionAnnonce{
     }
 
     public function getDatePublication(){
-        return $this->dateP;
+        return $this->datePublication;
     }
 
     public function getDateMaj(){
@@ -67,7 +65,7 @@ class gestionAnnonce{
 
     //Affiche la liste de toutes les annnonces
     public static function listeAnnonces(){
-        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, DATE_FORMAT(datePublication, '%d/%m/%Y') AS dateP, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
+        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, datePublication, A.id AS dateP, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
                                                 FROM annonces A
                                                 JOIN societes S ON A.societe = S.id
                                                 JOIN contrats C ON A.contrat = C.id
@@ -160,7 +158,7 @@ class gestionAnnonce{
     //Affiche la liste de toutes les annnonces en appuyant sur le bouton suivant
     public static function listeAnnoncesSuivante($numPageCalcul){
 
-        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, DATE_FORMAT(datePublication, '%d/%m/%Y'), A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
+        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, datePublication, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
                                                 FROM annonces A
                                                 JOIN societes S ON A.societe = S.id
                                                 JOIN contrats C ON A.contrat = C.id
@@ -177,7 +175,7 @@ class gestionAnnonce{
 
     //Affiche la liste de toutes les annnonces en appuyant sur le bouton précédent
     public static function listeAnnoncesPrecendente($numPageCalcul){
-        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, DATE_FORMAT(datePublication, '%d/%m/%Y'), A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
+        $req= MonPdo::getInstance()->prepare("SELECT image, intitule, datePublication, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
                                                 FROM annonces A
                                                 JOIN societes S ON A.societe = S.id
                                                 JOIN contrats C ON A.contrat = C.id
