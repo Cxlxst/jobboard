@@ -14,6 +14,7 @@ else{
 
 switch($uc){
     case "accueil":
+        $numPage = 1;
         include "Controleurs/controleurGestion.php";
         break;
 
