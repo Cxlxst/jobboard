@@ -9,8 +9,6 @@ else{
 
 switch($page){
     case "page1":
-        $currentPage = 1;
-
         $nbrAnnonces=gestionAnnonce::nbrAnnonces();
         $annonces=gestionAnnonce::listeAnnonces();
         $metiers=gestionMetier::listeMetiers();
@@ -21,13 +19,13 @@ switch($page){
         break;
 
     case "suivant":
-        $currentPage = $_POST['currentPage'];
-        $premiere = ((int)$currentPage * 2);
-        $derniere= $currentPage * 2;
-        $currentPage += 1;
+        $numPage = $_POST['numPage'];
+        $numPage += 1;
+
+        $numPageCalcul = ($numPage-1)*10;
 
         $nbrAnnonces=gestionAnnonce::nbrAnnonces();
-        $annonces=gestionAnnonce::listeAnnoncesSuivante($premiere, $derniere);
+        $annonces=gestionAnnonce::listeAnnoncesSuivante($numPageCalcul);
         $metiers=gestionMetier::listeMetiers();
         $villes=gestionVille::listeVilles();
         $contrats=gestionContrat::listeContrats();
@@ -36,13 +34,13 @@ switch($page){
         break;
 
     case "precedent":
-        $currentPage = $_POST['currentPage']-1;
-        $premiere = ((int)$currentPage * 2);
-        $derniere= $premiere - 2;
-        $currentPage -= 1;
+        $numPage = $_POST['numPage'];
+        $numPage -= 1;
+
+        $numPageCalcul = ($numPage-1)*10;
 
         $nbrAnnonces=gestionAnnonce::nbrAnnonces();
-        $annonces=gestionAnnonce::listeAnnoncesPrecendente($premiere, $derniere);
+        $annonces=gestionAnnonce::listeAnnoncesPrecendente($numPageCalcul);
         $metiers=gestionMetier::listeMetiers();
         $villes=gestionVille::listeVilles();
         $contrats=gestionContrat::listeContrats();
@@ -51,15 +49,15 @@ switch($page){
         break;
 
     case "recherche":
-        $recherche = $_POST['recherche'];
-        $metierList = $_POST['metiersList'];
-        $villeList = $_POST['villesList'];
-        $contratsList = $_POST['contratsList'];
-        $filtres = $_POST['filtres'];
+        $recherche = $_GET['recherche'];
+        $metierList = $_GET['metiersList'];
+        $villeList = $_GET['villesList'];
+        $contratsList = $_GET['contratsList'];
+        $filtres = $_GET['filtres'];
         
-        $sessionMetier = $_POST['sessionMetier'];
-        $sessionContrat = $_POST['sessionContrat'];
-        $sessionVille = $_POST['sessionVille'];
+        $sessionMetier = $_GET['sessionMetier'];
+        $sessionContrat = $_GET['sessionContrat'];
+        $sessionVille = $_GET['sessionVille'];
         
         $annonces=gestionAnnonce::listeRecherche($recherche, $metierList, $villeList, $contratsList, $filtres);
         $metiers=gestionMetier::listeMetiers();

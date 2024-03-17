@@ -74,7 +74,7 @@ class gestionAnnonce{
                                                 JOIN metiers M ON A.metier = M.id
                                                 JOIN villes V ON A.lieu = V.id
                                                 -- ORDER BY datePublication DESC
-                                                LIMIT 0,2 ");
+                                                LIMIT 0,10 ");
         $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'gestionAnnonce');
         $req->execute();
         $annonces = $req->fetchAll();
@@ -158,7 +158,7 @@ class gestionAnnonce{
     }
 
     //Affiche la liste de toutes les annnonces en appuyant sur le bouton suivant
-    public static function listeAnnoncesSuivante($premiere, $currentPage){
+    public static function listeAnnoncesSuivante($numPageCalcul){
 
         $req= MonPdo::getInstance()->prepare("SELECT image, intitule, datePublication, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
                                                 FROM annonces A
@@ -166,10 +166,9 @@ class gestionAnnonce{
                                                 JOIN contrats C ON A.contrat = C.id
                                                 JOIN metiers M ON A.metier = M.id
                                                 JOIN villes V ON A.lieu = V.id
-                                                LIMIT :currentPage OFFSET :premiere");
+                                                LIMIT numPageCalcul, 10");
         $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'gestionAnnonce');
-        $req->bindParam('premiere', $premiere, PDO::PARAM_INT);
-        $req->bindParam('currentPage', $currentPage, PDO::PARAM_INT);
+        $req->bindParam('numPageCalcul', $numPageCalcul, PDO::PARAM_INT);
         $req->execute();
         $annonces = $req->fetchAll();
 
@@ -177,17 +176,16 @@ class gestionAnnonce{
     }
 
     //Affiche la liste de toutes les annnonces en appuyant sur le bouton précédent
-    public static function listeAnnoncesPrecendente($premiere, $derniere){
+    public static function listeAnnoncesPrecendente($numPageCalcul){
         $req= MonPdo::getInstance()->prepare("SELECT image, intitule, datePublication, A.id AS idReference, S.nom AS nomSociete, C.libelle AS libelleContrat, M.libelle AS libelleMetier, V.libelle AS libelleVille, V.codePostal
                                                 FROM annonces A
                                                 JOIN societes S ON A.societe = S.id
                                                 JOIN contrats C ON A.contrat = C.id
                                                 JOIN metiers M ON A.metier = M.id
                                                 JOIN villes V ON A.lieu = V.id
-                                                LIMIT :derniere OFFSET :derniere");
+                                                LIMIT :numPageCalcul, 10");
         $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'gestionAnnonce');
-        // $req->bindParam('premiere', $premiere, PDO::PARAM_INT);
-        $req->bindParam('derniere', $derniere, PDO::PARAM_INT);
+        $req->bindParam('numPageCalcul', $numPageCalcul, PDO::PARAM_INT);
         $req->execute();
         $annonces = $req->fetchAll();
 
