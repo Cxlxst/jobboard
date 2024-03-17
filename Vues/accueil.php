@@ -1,6 +1,3 @@
-<?php session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -21,7 +18,7 @@
                 <form action="index.php" method="GET">
                     <input type="hidden" name="uc" value="accueil" />
                     <input type="hidden" name="page" value="recherche" />
-                    <input type="text" name="recherche" class="inputRecherche" placeholder="Votre métier de rêve"> </input>
+                    <input <?= (isset($_GET['inputRecherche']))?'value="<?php echo $recherche ?>"':'' ?> type="text" name="recherche" class="inputRecherche" placeholder="Votre métier de rêve"> </input>
                     
                     <select name="metiersList" placeholder="Métier">
                     <?php foreach($metiers as $metier){?>
@@ -43,45 +40,36 @@
                     </select>
 
                     <select name="filtres" placeholder="Filtres">
-                        <?php if(isset($_GET['filtres']) && $_GET['filtres']=='dateAsc')?> {
-                            <option value="dateAsc" selected>Date de publication (Plus récente)</option>
-                            <option value="dateDesc">Date de publication (Plus ancienne)</option>
+                        <?php if(isset($_GET['filtres']) && $_GET['filtres']=='dateAsc') { ?>
+                            <option value="dateDesc">Date de publication (Plus récente)</option>
+                            <option value="dateAsc" selected>Date de publication (Plus ancienne)</option>
                             <option value="alphAZ">A à Z</option>
                             <option value="alphZA">Z à A</option>
-                        }
-                        <?php else if(isset($_GET['filtres']) && $_GET['filtres']=='dateDesc')?> {
-                            <option value="dateAsc">Date de publication (Plus récente)</option>
-                            <option value="dateDesc" selected>Date de publication (Plus ancienne)</option>
+                        <?php }
+                        else if(isset($_GET['filtres']) && $_GET['filtres']=='alphAZ') { ?>
+                            <option value="dateDesc">Date de publication (Plus récente)</option>
+                            <option value="dateAsc">Date de publication (Plus ancienne)</option>
+                            <option value="alphAZ" selected>A à Z</option>
+                            <option value="alphZA">Z à A</option>
+                        <?php }
+                        else if(isset($_GET['filtres']) && $_GET['filtres']=='alphZA'){ ?>
+                            <option value="dateDesc">Date de publication (Plus récente)</option>
+                            <option value="dateAsc">Date de publication (Plus ancienne)</option>
+                            <option value="alphAZ">A à Z</option>
+                            <option value="alphZA" selected>Z à A</option>
+                        <?php } 
+                        else {?>
+                            <option value="dateDesc" selected>Date de publication (Plus récente)</option>
+                            <option value="dateAsc">Date de publication (Plus ancienne)</option>
                             <option value="alphAZ">A à Z</option>
                             <option value="alphZA">Z à A</option>
-                        }
+                        <?php } ?>
                     </select>
-
-                    <?php
-                    if(isset($metierList)){
-                        $_SESSION['metier']=$metierList;
-                    }
-                    else{
-                        
-                    }
-
-                    if(isset($villeList)){
-                        $_SESSION['ville']=$villeList;
-                    }
-                    
-                    if(isset($contratsList)){
-                        $_SESSION['contrat']=$contratsList;
-                    }?>
-
-                    <input type="hidden" name="sessionMetier" value="<?php if(isset($metierList)){ echo $_SESSION['metier']; } ?>">
-                    <input type="hidden" name="sessionContrat" value="<?php if(isset($villeList)){ echo $_SESSION['contrat']; } ?>">
-                    <input type="hidden" name="sessionVille" value="<?php if(isset($contratsList)){ echo $_SESSION['ville']; } ?>">
 
                     <button type="submit" class="buttonSearch"> <img src="Vues/img/loupe.png" class="searchImg"> </button>
                 </form>
             </div>
         </div>
-        
         
         
         <div class="flexContainer">
