@@ -18,32 +18,43 @@
                     <button type="submit" name="buttonReset" class="buttonReset"> Réinitialiser les champs </button>
                 </form>
 
-                <form action="index.php?uc=accueil&page=recherche" method="POST">
+                <form action="index.php" method="GET">
+                    <input type="hidden" name="uc" value="accueil" />
+                    <input type="hidden" name="page" value="recherche" />
                     <input type="text" name="recherche" class="inputRecherche" placeholder="Votre métier de rêve"> </input>
                     
                     <select name="metiersList" placeholder="Métier">
-                        <?php foreach($metiers as $metier){ ?>
-                            <option> <?php echo $metier->getLibelle() ?></option>
+                    <?php foreach($metiers as $metier){?>
+                            <!-- Check (isset) pour savoir si il y a une valeur dans contratsList, récupération (GET) de la donnée et set (selected) de celle-ci pour la garder -->
+                            <option <?= (isset($_GET['metiersList']) && $_GET['metiersList']==$metier->getLibelle())?'selected="selected"':'' ?> value="<?php echo $metier->getLibelle()?>"> <?php echo $metier->getLibelle() ?></option>
                         <?php } ?>
                     </select>
                     
                     <select name="contratsList" placeholder="Contrats">
                         <?php foreach($contrats as $contrat){ ?>
-                            <option> <?php echo $contrat->getLibelle() ?></option>
+                            <option <?= (isset($_GET['contratsList']) && $_GET['contratsList']==$contrat->getLibelle())?'selected="selected"':'' ?> value="<?php echo $contrat->getLibelle()?>"> <?php echo $contrat->getLibelle() ?></option>
                         <?php } ?>
                     </select>
 
                     <select name="villesList" placeholder="Villes (en France)">
                         <?php foreach($villes as $ville){ ?>
-                            <option> <?php echo $ville->getLibelle() ?></option>
+                            <option <?= (isset($_GET['villesList']) && $_GET['villesList']==$ville->getLibelle())?'selected="selected"':'' ?> value="<?php echo $ville->getLibelle() ?>"> <?php echo $ville->getLibelle() ?></option>
                         <?php } ?>
                     </select>
 
                     <select name="filtres" placeholder="Filtres">
-                        <option value="dateAsc">Date de publication (Plus récente)</option>
-                        <option value="dateDesc">Date de publication (Plus ancienne)</option>
-                        <option value="alphAZ">A à Z</option>
-                        <option value="alphZA">Z à A</option>
+                        <?php if(isset($_GET['filtres']) && $_GET['filtres']=='dateAsc')?> {
+                            <option value="dateAsc" selected>Date de publication (Plus récente)</option>
+                            <option value="dateDesc">Date de publication (Plus ancienne)</option>
+                            <option value="alphAZ">A à Z</option>
+                            <option value="alphZA">Z à A</option>
+                        }
+                        <?php else if(isset($_GET['filtres']) && $_GET['filtres']=='dateDesc')?> {
+                            <option value="dateAsc">Date de publication (Plus récente)</option>
+                            <option value="dateDesc" selected>Date de publication (Plus ancienne)</option>
+                            <option value="alphAZ">A à Z</option>
+                            <option value="alphZA">Z à A</option>
+                        }
                     </select>
 
                     <?php
@@ -101,11 +112,13 @@
         
         <div class="flexNav">
             <form action="index.php?uc=accueil&page=precedent" method="POST">
+                <input type="hidden" name="numPage" value="<?php echo $numPage?>">
                 <input type="hidden" name="currentPage" value="<?php echo $currentPage ?>">
                 <button type="submit" class="buttonNav">Page précédente</button>
             </form>
 
             <form action="index.php?uc=accueil&page=suivant" method="POST">
+                <input type="hidden" name="numPage" value="<?php echo $numPage?>">
                 <input type="hidden" name="currentPage" value="<?php echo $currentPage ?>">
                 <button type="submit" class="buttonNav">Page suivante</button>
             </form>
