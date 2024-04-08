@@ -1,6 +1,0 @@
-ErrorDocument 401 "Authorisation Required"
-AuthType Basic
-AuthName "Veuillez entrer vos identifiants"
-AuthUserFile /home/sk-celeste-terpin/www/.htpasswd
-Require user rooty
-Satisfy All
