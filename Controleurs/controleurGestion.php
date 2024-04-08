@@ -55,9 +55,9 @@ switch($page){
         $contratsList = $_GET['contratsList'];
         $filtres = $_GET['filtres'];
         
-        $sessionMetier = $_GET['sessionMetier'];
-        $sessionContrat = $_GET['sessionContrat'];
-        $sessionVille = $_GET['sessionVille'];
+        // $sessionMetier = $_GET['sessionMetier'];
+        // $sessionContrat = $_GET['sessionContrat'];
+        // $sessionVille = $_GET['sessionVille'];
         
         $annonces=gestionAnnonce::listeRecherche($recherche, $metierList, $villeList, $contratsList, $filtres);
         $metiers=gestionMetier::listeMetiers();
